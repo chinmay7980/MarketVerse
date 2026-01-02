@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { emit } = require('../app')
+
 
 
 const addressesSchema = new mongoose.Schema({
@@ -7,7 +7,8 @@ const addressesSchema = new mongoose.Schema({
     city:String,
     state:String,
     zip:String,
-    country:String
+    country:String,
+    isDefault:{type:Boolean,default:false}
 })
 const userSchema = new mongoose.Schema({
     username:{
@@ -34,8 +35,11 @@ const userSchema = new mongoose.Schema({
     },
     addresses:[
         addressesSchema
-    ]
-})
+    ],
+    refreshToken:{
+        type:String
+    }
+},{timestamps:true})
 
 const userModel = mongoose.model('user',userSchema)
 
